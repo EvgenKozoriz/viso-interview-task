@@ -94,7 +94,16 @@ const ProductList: React.FC = () => {
         product.title.toLowerCase().includes(term.toLowerCase()) ||
         product.description.toLowerCase().includes(term.toLowerCase())
     );
-    setFilteredProducts(filtered);
+
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+
+    const paginatedProducts = filtered.slice(
+      indexOfFirstProduct,
+      indexOfLastProduct
+    );
+
+    setFilteredProducts(paginatedProducts);
   }, 500);
 
   const paginate = (pageNumber: number) => {
